@@ -10,19 +10,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysema.query.types.Predicate;
 import com.test.framework.repository.BaseRepository;
 
-public class BaseService<T, ID extends Serializable, R extends BaseRepository<T, ID>> {
+public abstract class BaseService<T, ID extends Serializable, R extends BaseRepository<T, ID>> {
 	protected static Logger logger = LoggerFactory.getLogger(BaseService.class);
 
 	protected Class<T> entityClass;
 
 	@Autowired
 	protected R repository;
-
-	ObjectMapper mapper = new ObjectMapper();
 
 	public T find(ID id) {
 		return (T) this.repository.findOne(id);
