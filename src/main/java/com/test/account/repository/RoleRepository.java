@@ -1,5 +1,7 @@
 package com.test.account.repository;
 
+import java.util.List;
+
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Component;
 
@@ -9,5 +11,5 @@ import com.test.framework.repository.BaseRepository;
 @Component
 public interface RoleRepository extends BaseRepository<Role, String>, QueryDslPredicateExecutor<Role> {
 
-	Role findByName(String name);
+	List<Role> findByName(String name);
 }
