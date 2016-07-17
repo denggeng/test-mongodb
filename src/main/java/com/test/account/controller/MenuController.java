@@ -8,26 +8,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.test.account.domain.User;
-import com.test.account.service.UserService;
+import com.test.account.domain.Menu;
+import com.test.account.service.MenuService;
 
 /**
- * @author Kenny
- * @time 2016年7月14日 下午3:41:02
+ * @author Kenny 2016年7月17日 上午9:33:35
  */
 @Controller
-@RequestMapping("user")
-public class UserController {
+@RequestMapping("menu")
+public class MenuController {
 
 	@Autowired
-	private UserService userService;
-	
-	
+	MenuService menuService;
 
-	@RequestMapping("addSimpleUser")
+	@RequestMapping("addSimpleMenu")
 	@ResponseBody
-	public String addSimpleUser(User user) {
-		userService.save(user);
+	public String addSimpleMenu(Menu menu) {
+		menuService.save(menu);
 		return "add success!";
 	}
 }

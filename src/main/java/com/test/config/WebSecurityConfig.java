@@ -47,7 +47,7 @@ public class WebSecurityConfig {
 		public void configure(WebSecurity web) throws Exception {//
 			// 跳过静态文件
 			web.ignoring().antMatchers("/admin/static/**",
-					"/console/**"/* , "/admin/**" 暂时跳过登录界面 */);
+					"/console/**" , "/font-awesome/**","/fonts/**","/user/**","/**" );
 		}
 
 		@Override

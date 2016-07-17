@@ -27,10 +27,10 @@ public class CityController {
 	@Autowired
 	private CityRepository cityRepository;
 
-	@RequestMapping("/")
+/*	@RequestMapping("/")
 	String home() {
 		return "Hello World!" + myBean.example();
-	}
+	}*/
 
 	@RequestMapping("/insertMongo")
 	String insetMongo(String name, String state) {

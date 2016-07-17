@@ -3,8 +3,6 @@
  */
 package com.test.account.repository;
 
-import java.math.BigInteger;
-
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +14,7 @@ import com.test.framework.repository.BaseRepository;
  * @time 2016年7月14日 下午3:39:54
  */
 @Component
-public interface UserRepository extends BaseRepository<User, BigInteger>, QueryDslPredicateExecutor<User> {
+public interface UserRepository extends BaseRepository<User, String>, QueryDslPredicateExecutor<User> {
 
 	User findByUsername(String username);
 
