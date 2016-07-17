@@ -29,7 +29,7 @@ public class UserService extends BaseService<User, String, UserRepository> {
 		return repository.findByUsername(userName);
 	}
 
-	public void save(User user) {
+	public void encodePasswordAndSave(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		super.save(user);
 	}

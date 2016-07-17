@@ -9,4 +9,5 @@ import com.test.framework.repository.BaseRepository;
 @Component
 public interface RoleRepository extends BaseRepository<Role, String>, QueryDslPredicateExecutor<Role> {
 
+	Role findByName(String name);
 }

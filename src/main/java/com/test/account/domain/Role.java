@@ -5,6 +5,7 @@ package com.test.account.domain;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,6 +21,7 @@ import com.test.framework.domain.AuditDocument;
 @Document
 public class Role extends AuditDocument {
 
+	@Indexed(unique = true)
 	private String name;
 
 	private String comment;
