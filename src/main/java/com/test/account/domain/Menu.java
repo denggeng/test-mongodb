@@ -28,6 +28,9 @@ public class Menu extends IdDocument implements Comparable<Menu>, Serializable {
 	/** 目标窗口 */
 	private java.lang.String target;
 
+	/* 菜单图标样式 */
+	private String iconClass;
+
 	// 子菜单
 	@DBRef
 	private List<Menu> childrenMenuList = Lists.newArrayList();
@@ -105,7 +108,8 @@ public class Menu extends IdDocument implements Comparable<Menu>, Serializable {
 
 	@Override
 	public int compareTo(Menu o) {
-		return this.getOrderId().compareTo(o.getOrderId());
+		return (this.getOrderId() == null ? (Long) 0l : this.getOrderId())
+				.compareTo(o.getOrderId() == null ? (Long) 0l : o.getOrderId());
 	}
 
 	@Override
@@ -113,6 +117,14 @@ public class Menu extends IdDocument implements Comparable<Menu>, Serializable {
 		return "Menu [parentId=" + parentId + ", name=" + name + ", url=" + url + ", orderId=" + orderId + ", target="
 				+ target + ", childrenMenuList=" + childrenMenuList + ", authorizedChildrenMenuList="
 				+ authorizedChildrenMenuList + ", childrenMenuIdList=" + childrenMenuIdList + "]";
+	}
+
+	public String getIconClass() {
+		return iconClass;
+	}
+
+	public void setIconClass(String iconClass) {
+		this.iconClass = iconClass;
 	}
 
 }
