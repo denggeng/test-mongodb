@@ -8,6 +8,8 @@ import java.util.List;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.test.framework.domain.AuditDocument;
+
 /**
  * 角色实体
  * 
@@ -16,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 
 @Document
-public class Role {
+public class Role extends AuditDocument {
 
 	private String name;
 
@@ -24,6 +26,9 @@ public class Role {
 
 	@DBRef
 	private List<Permission> permissions;
+
+	@DBRef
+	private List<Menu> Menus;
 
 	public String getName() {
 		return name;
@@ -47,6 +52,21 @@ public class Role {
 
 	public void setPermissions(List<Permission> permissions) {
 		this.permissions = permissions;
+	}
+
+	public List<Menu> getMenus() {
+		return Menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		Menus = menus;
+	}
+
+	@Override
+	public String toString() {
+		return "Role [name=" + name + ", comment=" + comment + ", permissions=" + permissions + ", Menus=" + Menus
+				+ ", getLastModifiedDate()=" + getLastModifiedDate() + ", getCreatedDate()=" + getCreatedDate()
+				+ ", getId()=" + getId() + "]";
 	}
 
 }

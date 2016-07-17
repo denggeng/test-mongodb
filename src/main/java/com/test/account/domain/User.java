@@ -62,4 +62,11 @@ public class User extends AuditDocument {
 		this.roles = roles;
 	}
 
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", nickName=" + nickName + ", password=" + password + ", roles=" + roles
+				+ ", getLastModifiedDate()=" + getLastModifiedDate() + ", getCreatedDate()=" + getCreatedDate()
+				+ ", getId()=" + getId() + "]";
+	}
+
 }

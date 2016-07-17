@@ -6,6 +6,8 @@ package com.test.account.domain;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.test.framework.domain.AuditDocument;
+
 /**
  * 权限表
  * 
@@ -13,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @time 2016年7月14日 下午4:14:24
  */
 @Document
-public class Permission {
+public class Permission extends AuditDocument {
 
 	@Indexed(unique = true)
 	private String name;
