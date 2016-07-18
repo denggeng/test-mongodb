@@ -20,4 +20,5 @@ public class MenuService extends BaseService<Menu, String, MenuRepository> {
 	public List<Menu> findByParentId(String parentId){
 		return repository.findByParentId(parentId);
 	}
+	
 }

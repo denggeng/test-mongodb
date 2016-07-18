@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment :: #_head">
+
+</head>
+<body>
+	<div id="wrapper">
+		<div th:include="fragment :: #_nav"></div>
+
+		<div id="page-wrapper" class="gray-bg dashbard-1">
+			<div class="row border-bottom" th:include="fragment :: #_top-nav">
+
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>菜单编辑</h5>
+							<div class="ibox-tools"></div>
+						</div>
+						<div class="ibox-content">
+							<form role="form" class="form-horizontal"
+								th:action="@{/menu/save}">
+								<input type="hidden" name="id" th:value="${entity.id}" />
+								<div class="form-group">
+									<label for="name" class="col-lg-2  control-label">名称</label>
+									<div class="col-lg-10">
+										<input placeholder="名称" id="name" name="name"
+											class="form-control" th:value="${entity.name}"
+											required="required" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="displayName" class="col-lg-2  control-label">链接</label>
+									<div class="col-lg-10">
+										<input placeholder="链接" id="url" name="url"
+											class="form-control" required="required"
+											th:value="${entity.url}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2  control-label">父菜单ID</label>
+
+									<div class="col-sm-10">
+										<select class="form-control" name="parentId">
+											<option th:selected="${'root' == entity.parentId}" value="root">root</option>
+											<option th:each="en:${list}" th:value="${en.id}" th:text="${en.name}" th:selected="${en.parentId == entity.parentId}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="displayName" class="col-lg-2  control-label">排序</label>
+									<div class="col-lg-10">
+										<input placeholder="排序" id="url" name="orderId"
+											class="form-control" required="required"
+											th:value="${entity.orderId}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-offset-5 col-lg-10">
+										<button class="btn btn-primary btn-sm" type="submit">保存</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-lg-5">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>Horizontal form</h5>
+							<div class="ibox-tools">
+								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+								</a> <a class="dropdown-toggle" data-toggle="dropdown"
+									href="form_basic.html#"> <i class="fa fa-wrench"></i>
+								</a>
+								<ul class="dropdown-menu dropdown-user">
+									<li><a href="form_basic.html#">Config option 1</a></li>
+									<li><a href="form_basic.html#">Config option 2</a></li>
+								</ul>
+								<a class="close-link"> <i class="fa fa-times"></i>
+								</a>
+							</div>
+						</div>
+						<div class="ibox-content">
+							<form class="form-horizontal">
+								<p>Sign in today for more expirience.</p>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Email</label>
+
+									<div class="col-lg-10">
+										<input type="email" placeholder="Email" class="form-control" />
+										<span class="help-block m-b-none">Example block-level
+											help text here.</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Password</label>
+
+									<div class="col-lg-10">
+										<input type="password" placeholder="Password"
+											class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-offset-2 col-lg-10">
+										<div class="i-checks">
+											<label class="">
+												<div class="icheckbox_square-green"
+													style="position: relative;">
+													<input type="checkbox"
+														style="position: absolute; opacity: 0;" />
+													<ins class="iCheck-helper"
+														style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+												</div> <i></i> Remember me
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-offset-2 col-lg-10">
+										<button class="btn btn-sm btn-white" type="submit">Sign
+											in</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" th:include="fragment :: #_footer"></div>
+		</div>
+
+		<div th:include="fragment :: #small-chat" style="display: none;">
+		</div>
+
+	</div>
+
+	<div th:include="fragment :: #_footer-js"></div>
+
+</body>
+</html>

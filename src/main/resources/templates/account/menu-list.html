@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment :: #_head">
+
+</head>
+<body>
+	<div id="wrapper">
+		<div th:include="fragment :: #_nav"></div>
+
+		<div id="page-wrapper" class="gray-bg dashbard-1">
+			<div class="row border-bottom" th:include="fragment :: #_top-nav">
+
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>菜单列表</h5>
+							<div class="ibox-tools">
+								<a class="" th:href="@{/menu/add}">新增 <i
+									class="fa fa-plus"></i>
+								</a>
+							</div>
+						</div>
+						<div class="ibox-content">
+
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>名称</th>
+										<th>链接</th>
+										<th>父菜单ID</th>
+										<th>排序</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="entity,iterStat:${list}">
+										<td th:text="${iterStat.index}">1</td>
+										<td th:text="${entity.name}"></td>
+										<td th:text="${entity.url}"></td>
+										<td th:text="${entity.parentId}"></td>
+										<td th:text="${entity.orderId}"></td>
+										<td><a th:href="@{/menu/edit?id=}+${entity.id}">修改</a></td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" th:include="fragment :: #_footer"></div>
+		</div>
+
+		<div th:include="fragment :: #small-chat" style="display: none;">
+		</div>
+
+	</div>
+
+	<div th:include="fragment :: #_footer-js"></div>
+
+</body>
+</html>
