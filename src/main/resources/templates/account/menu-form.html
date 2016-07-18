@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment :: #_head">
+
+</head>
+<body>
+	<div id="wrapper">
+		<div th:include="fragment :: #_nav"></div>
+
+		<div id="page-wrapper" class="gray-bg dashbard-1">
+			<div class="row border-bottom" th:include="fragment :: #_top-nav">
+
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>菜单编辑</h5>
+							<div class="ibox-tools"></div>
+						</div>
+						<div class="ibox-content">
+							<form role="form" class="form-horizontal"
+								th:action="@{/menu/save}">
+								<input type="hidden" name="id" th:value="${entity.id}" />
+								<div class="form-group">
+									<label for="name" class="col-lg-2  control-label">名称</label>
+									<div class="col-lg-10">
+										<input placeholder="名称" id="name" name="name"
+											class="form-control" th:value="${entity.name}"
+											required="required" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="displayName" class="col-lg-2  control-label">链接</label>
+									<div class="col-lg-10">
+										<input placeholder="链接" id="url" name="url"
+											class="form-control" required="required"
+											th:value="${entity.url}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2  control-label">父菜单ID</label>
+
+									<div class="col-sm-10">
+										<select class="form-control" name="parentId">
+											<option th:selected="${'root' == entity.parentId}" value="root">root</option>
+											<option th:each="en:${list}" th:if="${en.id != entity.id}" th:value="${en.id}" th:text="${en.name}" th:selected="${en.parentId == entity.parentId}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="displayName" class="col-lg-2  control-label">排序</label>
+									<div class="col-lg-10">
+										<input placeholder="排序" id="url" name="orderId"
+											class="form-control" required="required"
+											th:value="${entity.orderId}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-offset-5 col-lg-10">
+										<button class="btn btn-primary btn-sm" type="submit">保存</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row" th:include="fragment :: #_footer"></div>
+		</div>
+
+		<div th:include="fragment :: #small-chat" style="display: none;">
+		</div>
+
+	</div>
+
+	<div th:include="fragment :: #_footer-js"></div>
+
+</body>
+</html>
