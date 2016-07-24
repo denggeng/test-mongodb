@@ -69,4 +69,15 @@ public class User extends AuditDocument {
 				+ ", getId()=" + getId() + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof User) {
+			User p = (User) obj;
+			if (p.getId().equals(this.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

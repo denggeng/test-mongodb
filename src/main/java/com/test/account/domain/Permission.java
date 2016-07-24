@@ -38,4 +38,15 @@ public class Permission extends AuditDocument {
 		this.displayName = displayName;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof Permission) {
+			Permission p = (Permission) obj;
+			if (p.getId().equals(this.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

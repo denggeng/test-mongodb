@@ -32,10 +32,12 @@ public class MenuService extends BaseService<Menu, String, MenuRepository> {
 			// 处理旧的父菜单
 			if (!oldMenu.getParentId().equals(menu.getParentId())) {
 				Menu oldpMenu = super.find(oldMenu.getParentId());
-				List<Menu> oldpChildrenMenuList = oldpMenu.getChildrenMenuList();
-				// List<Menu> oldpNewChildren = new ArrayList<>();
-				oldpChildrenMenuList.remove(oldMenu);
-				super.save(oldpMenu);
+				if (oldpMenu != null) {
+					List<Menu> oldpChildrenMenuList = oldpMenu.getChildrenMenuList();
+					// List<Menu> oldpNewChildren = new ArrayList<>();
+					oldpChildrenMenuList.remove(oldMenu);
+					super.save(oldpMenu);
+				}
 			}
 		}
 		// 处理子菜单

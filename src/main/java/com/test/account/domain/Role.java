@@ -3,6 +3,7 @@
  */
 package com.test.account.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -27,10 +28,10 @@ public class Role extends AuditDocument {
 	private String comment;
 
 	@DBRef
-	private List<Permission> permissions;
+	private List<Permission> permissions = new ArrayList<>();
 
 	@DBRef
-	private List<Menu> Menus;
+	private List<Menu> menus = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -57,18 +58,29 @@ public class Role extends AuditDocument {
 	}
 
 	public List<Menu> getMenus() {
-		return Menus;
+		return menus;
 	}
 
 	public void setMenus(List<Menu> menus) {
-		Menus = menus;
+		this.menus = menus;
 	}
 
 	@Override
 	public String toString() {
-		return "Role [name=" + name + ", comment=" + comment + ", permissions=" + permissions + ", Menus=" + Menus
+		return "Role [name=" + name + ", comment=" + comment + ", permissions=" + permissions + ", menus=" + menus
 				+ ", getLastModifiedDate()=" + getLastModifiedDate() + ", getCreatedDate()=" + getCreatedDate()
 				+ ", getId()=" + getId() + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof Role) {
+			Role p = (Role) obj;
+			if (p.getId().equals(this.getId())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

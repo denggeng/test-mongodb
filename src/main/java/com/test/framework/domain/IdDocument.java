@@ -25,4 +25,10 @@ public abstract class IdDocument {
 		this.id = id;
 	}
 
+	@Override
+	public int hashCode() {
+		return this.getId().hashCode();
+
+	}
+
 }

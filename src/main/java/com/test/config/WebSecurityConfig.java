@@ -66,7 +66,7 @@ public class WebSecurityConfig {
 					.successHandler(adminLoginSuccessHandler)// code3
 					.and().logout()
 					// 退出登录后的默认网址是”/home”
-					.logoutSuccessUrl("/").permitAll().invalidateHttpSession(true).and()
+					.logoutSuccessUrl("/login").permitAll().invalidateHttpSession(true).and()
 					// 登录后记住用户，下次自动登录
 					// 数据库中必须存在名为persistent_logins的表
 					// 建表语句见code15
