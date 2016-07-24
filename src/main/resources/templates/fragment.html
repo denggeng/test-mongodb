@@ -47,14 +47,17 @@
                                 <li><a href="contacts.html">Contacts</a></li>
                                 <li><a href="mailbox.html">Mailbox</a></li>
                                 <li class="divider"></li> -->
-								<li><a th:href="@{/logout}">退出</a></li>
+								<li><a href="javascript:$('#logout').submit();">退出</a></li>
 							</ul>
+							<div style="display: none;">
+								<form id="logout" th:action="@{/logout}" method="post"></form>
+							</div>
 						</div>
 						<div class="logo-element">DM</div>
 					</li>
 					<li
 						th:each="firstLevMenu : ${session.SPRING_SECURITY_CONTEXT.authentication.principal.rootMenus}"><a
-						th:href="${firstLevMenu.url}"><i
+						th:href="@{${'/'+firstLevMenu.url}}"><i
 							th:class="${'fa '+(firstLevMenu.iconClass==null?'fa-diamond':firstLevMenu.iconClass)}"></i>
 							<span class="nav-label" th:text="${firstLevMenu.name}"></span><span
 							th:if="${firstLevMenu.authorizedChildrenMenuList.size() != 0}"
@@ -63,7 +66,7 @@
 							class="nav nav-second-level collapse">
 							<li
 								th:each="secondLevMenu:${firstLevMenu.authorizedChildrenMenuList}">
-								<a th:href="${secondLevMenu.url}"><span
+								<a th:href="@{${'/'+secondLevMenu.url}}"><span
 									th:text="${secondLevMenu.name}">Third Level</span> <span
 									th:if="${secondLevMenu.authorizedChildrenMenuList.size() != 0}"
 									class="fa arrow"></span></a>
@@ -72,7 +75,7 @@
 									class="nav nav-third-level">
 									<li
 										th:each="thirdLevMenu:${secondLevMenu.authorizedChildrenMenuList}">
-										<a th:href="${thirdLevMenu.url}"
+										<a th:href="@{${'/'+thirdLevMenu.url}}"
 										th:text="${thirdLevMenu.name}">Third Level Item</a>
 									</li>
 								</ul>
@@ -101,7 +104,7 @@
 			<ul class="nav navbar-top-links navbar-right">
 				<li><span class="m-r-sm text-muted welcome-message">欢迎使用数据管理平台</span>
 				</li>
-				<li><a th:href="@{/logout}"> <i class="fa fa-sign-out"></i> 退出
+				<li><a  href="javascript:$('#logout').submit();"> <i class="fa fa-sign-out"></i> 退出
 				</a></li>
 			</ul>
 

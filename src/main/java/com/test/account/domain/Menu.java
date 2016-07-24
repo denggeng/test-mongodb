@@ -127,4 +127,14 @@ public class Menu extends IdDocument implements Comparable<Menu>, Serializable {
 		this.iconClass = iconClass;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof Menu) {
+			Menu p = (Menu) obj;
+			if (p.getId().equals(this.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -73,7 +73,9 @@ public class AdminSecurityUser extends User implements UserDetails {
 		if (menus.size() == 0) {
 			for (Role role : this.getRoles()) {
 				List<Menu> ms = role.getMenus();
-				menus.addAll(ms);
+				if (ms != null) {
+					menus.addAll(ms);
+				}
 			}
 		}
 		return menus;
@@ -82,7 +84,9 @@ public class AdminSecurityUser extends User implements UserDetails {
 	public Map<String, Menu> getMenuMap() {
 		if (menuMap.size() == 0) {
 			for (Menu m : getMenus()) {
-				menuMap.put(m.getId(), m);
+				if (m != null) {
+					menuMap.put(m.getId(), m);
+				}
 			}
 		}
 		return menuMap;
@@ -91,10 +95,12 @@ public class AdminSecurityUser extends User implements UserDetails {
 	public List<Menu> getRootMenus() {
 		if (rootMenus.size() == 0) {
 			for (Menu m : getMenus()) {
-				if ("root".equals(m.getParentId())) {
-					rootMenus.add(m);
-					// 构建授权的子菜单
-					createAuthorizedChildrenMenuList(m);
+				if (m != null) {
+					if ("root".equals(m.getParentId())) {
+						rootMenus.add(m);
+						// 构建授权的子菜单
+						createAuthorizedChildrenMenuList(m);
+					}
 				}
 			}
 			Collections.sort(rootMenus);
