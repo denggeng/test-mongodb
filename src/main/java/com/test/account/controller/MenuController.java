@@ -3,7 +3,6 @@
  */
 package com.test.account.controller;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,20 +44,9 @@ public class MenuController {
 
 	@RequestMapping("save")
 	public String save(Model model, Menu entity) {
-		if (StringUtils.isBlank(entity.getId())) {
-			entity.setId(null);
-		} else {
-			Menu oldMenu = menuService.find(entity.getId());
-			entity.setChildrenMenuList(oldMenu.getChildrenMenuList());
-		}
-		// 处理子菜单
+
 		menuService.save(entity);
-		// 处理父菜单
-		Menu pMenu = menuService.find(entity.getParentId());
-		if (pMenu != null) {
-			pMenu.getChildrenMenuList().add(entity);
-			menuService.save(pMenu);
-		}
+
 		return "redirect:/menu/list";
 	}
 }

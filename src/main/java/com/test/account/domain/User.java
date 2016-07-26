@@ -3,7 +3,8 @@
  */
 package com.test.account.domain;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -27,8 +28,10 @@ public class User extends AuditDocument {
 
 	private String password;
 
+	private boolean forbidden;
+
 	@DBRef
-	private List<Role> roles;
+	private Set<Role> roles = new HashSet<>();
 
 	public String getUsername() {
 		return username;
@@ -54,19 +57,12 @@ public class User extends AuditDocument {
 		this.password = password;
 	}
 
-	public List<Role> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
-	}
-
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", nickName=" + nickName + ", password=" + password + ", roles=" + roles
-				+ ", getLastModifiedDate()=" + getLastModifiedDate() + ", getCreatedDate()=" + getCreatedDate()
-				+ ", getId()=" + getId() + "]";
 	}
 
 	@Override
@@ -78,6 +74,21 @@ public class User extends AuditDocument {
 			}
 		}
 		return false;
+	}
+
+	public boolean isForbidden() {
+		return forbidden;
+	}
+
+	public void setForbidden(boolean forbidden) {
+		this.forbidden = forbidden;
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", nickName=" + nickName + ", password=" + password + ", forbidden="
+				+ forbidden + ", roles=" + roles + ", getLastModifiedDate()=" + getLastModifiedDate()
+				+ ", getCreatedDate()=" + getCreatedDate() + ", getId()=" + getId() + "]";
 	}
 
 }

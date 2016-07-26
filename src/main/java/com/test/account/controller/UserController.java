@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.test.account.domain.User;
+import com.test.account.service.RoleService;
 import com.test.account.service.UserService;
 
 /**
@@ -22,6 +23,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 
 	@RequestMapping("list")
 	public String list(Model model) {
@@ -33,6 +37,7 @@ public class UserController {
 	@RequestMapping("add")
 	public String add(Model model) {
 		model.addAttribute("entity", new User());
+		model.addAttribute("allRoles", roleService.findAll());
 		model.addAttribute("list", userService.findAll());
 		return "account/user-form";
 	}
@@ -40,6 +45,7 @@ public class UserController {
 	@RequestMapping("edit")
 	public String edit(Model model, String id) {
 		model.addAttribute("entity", userService.find(id));
+		model.addAttribute("allRoles", roleService.findAll());
 		model.addAttribute("list", userService.findAll());
 		return "account/user-form";
 	}

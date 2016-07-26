@@ -3,8 +3,8 @@
  */
 package com.test.account.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -28,10 +28,10 @@ public class Role extends AuditDocument {
 	private String comment;
 
 	@DBRef
-	private List<Permission> permissions = new ArrayList<>();
+	private Set<Permission> permissions = new HashSet<>();
 
 	@DBRef
-	private List<Menu> menus = new ArrayList<>();
+	private Set<Menu> menus = new HashSet<>();
 
 	public String getName() {
 		return name;
@@ -49,19 +49,19 @@ public class Role extends AuditDocument {
 		this.comment = comment;
 	}
 
-	public List<Permission> getPermissions() {
+	public Set<Permission> getPermissions() {
 		return permissions;
 	}
 
-	public void setPermissions(List<Permission> permissions) {
+	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
 	}
 
-	public List<Menu> getMenus() {
+	public Set<Menu> getMenus() {
 		return menus;
 	}
 
-	public void setMenus(List<Menu> menus) {
+	public void setMenus(Set<Menu> menus) {
 		this.menus = menus;
 	}
 

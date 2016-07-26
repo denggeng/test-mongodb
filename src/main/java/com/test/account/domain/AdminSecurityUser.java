@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,7 +36,7 @@ public class AdminSecurityUser extends User implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
-		List<Role> userRoles = this.getRoles();
+		Set<Role> userRoles = this.getRoles();
 
 		if (userRoles != null) {
 			for (Role role : userRoles) {
@@ -72,7 +73,7 @@ public class AdminSecurityUser extends User implements UserDetails {
 	public List<Menu> getMenus() {
 		if (menus.size() == 0) {
 			for (Role role : this.getRoles()) {
-				List<Menu> ms = role.getMenus();
+				Set<Menu> ms = role.getMenus();
 				if (ms != null) {
 					menus.addAll(ms);
 				}
@@ -109,7 +110,7 @@ public class AdminSecurityUser extends User implements UserDetails {
 	}
 
 	private void createAuthorizedChildrenMenuList(Menu rootMenu) {
-		for (Menu m : rootMenu.getChildrenMenuList()) {
+		for (Menu m : rootMenu.getChildren()) {
 			if (getMenuMap().containsKey(m.getId())) {
 				rootMenu.getAuthorizedChildrenMenuList().add(m);
 				createAuthorizedChildrenMenuList(m);

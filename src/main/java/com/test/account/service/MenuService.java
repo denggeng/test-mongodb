@@ -4,9 +4,10 @@
 package com.test.account.service;
 
 import java.util.List;
+import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.test.account.domain.Menu;
 import com.test.account.repository.MenuRepository;
@@ -24,18 +25,21 @@ public class MenuService extends BaseService<Menu, String, MenuRepository> {
 
 	@Override
 	public void save(Menu menu) {
-		if (StringUtils.isBlank(menu.getId())) {
+		if (StringUtils.isEmpty(menu.getId())) {
 			menu.setId(null);
 		} else {
+			// 处理旧的子菜单
 			Menu oldMenu = super.find(menu.getId());
-			menu.setChildrenMenuList(oldMenu.getChildrenMenuList());
+			menu.setChildren(oldMenu.getChildren());
 			// 处理旧的父菜单
+			// 如果旧的父菜单不等于新的父菜单，则证明改了父菜单
 			if (!oldMenu.getParentId().equals(menu.getParentId())) {
+				// 找到旧的父菜单
 				Menu oldpMenu = super.find(oldMenu.getParentId());
 				if (oldpMenu != null) {
-					List<Menu> oldpChildrenMenuList = oldpMenu.getChildrenMenuList();
+					Set<Menu> oldpChildren = oldpMenu.getChildren();
 					// List<Menu> oldpNewChildren = new ArrayList<>();
-					oldpChildrenMenuList.remove(oldMenu);
+					oldpChildren.remove(oldMenu);
 					super.save(oldpMenu);
 				}
 			}
@@ -45,7 +49,7 @@ public class MenuService extends BaseService<Menu, String, MenuRepository> {
 		// 处理父菜单
 		Menu pMenu = super.find(menu.getParentId());
 		if (pMenu != null) {
-			pMenu.getChildrenMenuList().add(menu);
+			pMenu.getChildren().add(menu);
 			super.save(pMenu);
 		}
 

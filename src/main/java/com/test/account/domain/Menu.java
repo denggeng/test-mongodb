@@ -2,7 +2,9 @@
 package com.test.account.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -33,14 +35,12 @@ public class Menu extends IdDocument implements Comparable<Menu>, Serializable {
 
 	// 子菜单
 	@DBRef
-	private List<Menu> childrenMenuList = Lists.newArrayList();
+	private Set<Menu> children = new HashSet<>();
 
 	// 授权的子菜单
 	// @Transient
 	@DBRef
 	private List<Menu> authorizedChildrenMenuList = Lists.newArrayList();
-
-	private List<String> childrenMenuIdList = Lists.newArrayList();
 
 	public void setParentId(java.lang.String value) {
 		this.parentId = value;
@@ -82,22 +82,6 @@ public class Menu extends IdDocument implements Comparable<Menu>, Serializable {
 		this.target = target;
 	}
 
-	public List<Menu> getChildrenMenuList() {
-		return childrenMenuList;
-	}
-
-	public void setChildrenMenuList(List<Menu> childrenMenuList) {
-		this.childrenMenuList = childrenMenuList;
-	}
-
-	public List<String> getChildrenMenuIdList() {
-		return childrenMenuIdList;
-	}
-
-	public void setChildrenMenuIdList(List<String> childrenMenuIdList) {
-		this.childrenMenuIdList = childrenMenuIdList;
-	}
-
 	public List<Menu> getAuthorizedChildrenMenuList() {
 		return authorizedChildrenMenuList;
 	}
@@ -110,13 +94,6 @@ public class Menu extends IdDocument implements Comparable<Menu>, Serializable {
 	public int compareTo(Menu o) {
 		return (this.getOrderId() == null ? (Long) 0l : this.getOrderId())
 				.compareTo(o.getOrderId() == null ? (Long) 0l : o.getOrderId());
-	}
-
-	@Override
-	public String toString() {
-		return "Menu [parentId=" + parentId + ", name=" + name + ", url=" + url + ", orderId=" + orderId + ", target="
-				+ target + ", childrenMenuList=" + childrenMenuList + ", authorizedChildrenMenuList="
-				+ authorizedChildrenMenuList + ", childrenMenuIdList=" + childrenMenuIdList + "]";
 	}
 
 	public String getIconClass() {
@@ -137,4 +114,20 @@ public class Menu extends IdDocument implements Comparable<Menu>, Serializable {
 		}
 		return false;
 	}
+
+	public Set<Menu> getChildren() {
+		return children;
+	}
+
+	public void setChildren(Set<Menu> children) {
+		this.children = children;
+	}
+
+	@Override
+	public String toString() {
+		return "Menu [parentId=" + parentId + ", name=" + name + ", url=" + url + ", orderId=" + orderId + ", target="
+				+ target + ", iconClass=" + iconClass + ", children=" + children + ", authorizedChildrenMenuList="
+				+ authorizedChildrenMenuList + ", getId()=" + getId() + "]";
+	}
+
 }
