@@ -31,6 +31,7 @@ public class AdminSecurityUser extends User implements UserDetails {
 		this.setPassword(user.getPassword());
 		this.setNickName(user.getNickName());
 		this.setRoles(user.getRoles());
+		this.setForbidden(user.isForbidden());
 	}
 
 	@Override
