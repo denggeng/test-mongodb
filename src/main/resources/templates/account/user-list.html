@@ -34,11 +34,11 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="user,iterStat:${list}">
+									<tr th:each="entity,iterStat:${list}">
 										<td th:text="${iterStat.index}">1</td>
-										<td th:text="${user.username}"></td>
-										<td th:text="${user.nickName}"></td>
-										<td><a>禁用</a></td>
+										<td th:text="${entity.username}"></td>
+										<td th:text="${entity.nickName}"></td>
+										<td><a th:href="@{/user/edit?id=}+${entity.id}">修改</a>&nbsp;<a>禁用</a></td>
 									</tr>
 								</tbody>
 							</table>
