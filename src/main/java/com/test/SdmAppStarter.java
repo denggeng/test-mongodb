@@ -28,7 +28,9 @@ public class SdmAppStarter {
 
 	@Bean
 	public MongoDbFactory createMongoDbFactory() throws UnknownHostException {
-		MongoClientURI mcUri = new MongoClientURI("mongodb://127.0.0.1/test");
+		String uri = "summba-dev10:30000";
+		// String uri = "127.0.0.1";
+		MongoClientURI mcUri = new MongoClientURI("mongodb://" + uri + "/test2");
 		SimpleMongoDbFactory smf = new SimpleMongoDbFactory(mcUri);
 		return smf;
 
