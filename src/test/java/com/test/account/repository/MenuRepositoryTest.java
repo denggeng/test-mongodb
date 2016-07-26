@@ -59,7 +59,7 @@ public class MenuRepositoryTest {
 		List<Menu> rootList = menuService.findByParentId("root");
 		for (Menu m : rootList) {
 			if ("用户管理".equals(m.getName())) {
-				if (m.getChildrenMenuList().size() == 0) {
+				if (m.getChildren().size() == 0) {
 					Menu chdMenu = new Menu();
 					chdMenu.setParentId(m.getId());
 					chdMenu.setName("用户列表");
@@ -72,21 +72,21 @@ public class MenuRepositoryTest {
 					chdMenu2.setUrl("user/add");
 					chdMenu2.setOrderId(1l);
 					menuService.save(chdMenu2);
-					chdMenu.getChildrenMenuList().add(chdMenu2);
+					chdMenu.getChildren().add(chdMenu2);
 					menuService.save(chdMenu);
-					m.getChildrenMenuList().add(chdMenu);
+					m.getChildren().add(chdMenu);
 				} else {
-					Menu chdMenu = m.getChildrenMenuList().get(0);
-					if (chdMenu.getChildrenMenuList().size() == 0) {
+					Menu chdMenu = m.getChildren().iterator().next();
+					if (chdMenu.getChildren().size() == 0) {
 						Menu chdMenu2 = new Menu();
 						chdMenu2.setParentId(m.getId());
 						chdMenu2.setName("新增用户");
 						chdMenu2.setUrl("user/add");
 						chdMenu2.setOrderId(1l);
 						menuService.save(chdMenu2);
-						chdMenu.getChildrenMenuList().add(chdMenu2);
+						chdMenu.getChildren().add(chdMenu2);
 					}
-					m.getChildrenMenuList().add(chdMenu);
+					m.getChildren().add(chdMenu);
 				}
 				menuService.save(m);
 			}
