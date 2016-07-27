@@ -22,9 +22,6 @@ import com.test.domain.CityRepository;
 public class CityController {
 
 	@Autowired
-	private MyBean myBean;
-
-	@Autowired
 	private CityRepository cityRepository;
 
 /*	@RequestMapping("/")
